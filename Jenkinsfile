@@ -29,7 +29,7 @@ pipeline {
 
     stage('Package') {
       steps {
-        sh './mvnw package -DskipTests=true'
+        sh ' ./mvnw package -DskipTests=true'
       }
     }
 
@@ -42,12 +42,6 @@ pipeline {
         }
 
         stage('Integration and Performance Tests') {
-          agent {
-            node {
-              label 'test'
-            }
-
-          }
           steps {
             sh './mvnw verify'
             junit '**/target/surefire-reports/*.xml'
